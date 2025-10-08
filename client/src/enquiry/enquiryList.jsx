@@ -7,7 +7,7 @@ export function EnquiryList({ data, getAllEnqury, setFormData }) {
 
   // Delete a row
   const deleteRow = (delid) => {
-    axios.delete(`http://localhost:8000/api/website/enquiry/delete/${delid}`)
+    axios.delete(`https://user-enquiry-app-f0r1.onrender.com/api/website/enquiry/delete/${delid}`)
       .then((res) => {
         toast.success("Entry Deleted Successfully");
         getAllEnqury();
@@ -20,7 +20,7 @@ export function EnquiryList({ data, getAllEnqury, setFormData }) {
 
   // Edit a row
   const editRow = (editid) => {
-    axios.get(`http://localhost:8000/api/website/enquiry/single/${editid}`)
+    axios.get(`https://user-enquiry-app-f0r1.onrender.com/api/website/enquiry/single/${editid}`)
       .then((res) => {
         const data = res.data;
         if (data.status) {

@@ -25,7 +25,7 @@ export default function Enquiry() {
   //   message:e.target.message.value
   // }
     if(formData._id){
-        axios.put(`http://localhost:8000/api/website/enquiry/update/${formData._id}` , formData)
+        axios.put(`https://user-enquiry-app-f0r1.onrender.com/api/website/enquiry/update/${formData._id}`, formData)
         .then((res) =>{
           toast.success("Enquiry Updated Successfully") 
           setFormData({
@@ -42,7 +42,7 @@ export default function Enquiry() {
           toast.error("Failed to update enquiry");
         });
     }else{
-       axios.post("http://localhost:8000/api/website/enquiry/insert" , formData)
+       axios.post("https://user-enquiry-app-f0r1.onrender.com/api/website/enquiry/insert", formData)
   .then((res) =>{
     console.log(res.data);
     toast.success("Enquiry Saved Successfully")
@@ -65,7 +65,7 @@ export default function Enquiry() {
  
 
   let getAllEnqury = () =>{
-    axios.get("http://localhost:8000/api/website/enquiry/view")
+    axios.get("https://user-enquiry-app-f0r1.onrender.com/api/website/enquiry/view")
     .then((res) =>{
       return res.data;
     })
