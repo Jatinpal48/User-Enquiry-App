@@ -4,7 +4,13 @@ const enquiryRoute = require('./App/routes/web/enquiryRoute');
 require('dotenv').config();
 let cors = require('cors');
 let app = express();
-app.use(cors());
+app.use(cors(
+    {
+    origin: 'https://user-enquiry-app.vercel.app', // your frontend URL
+    methods: ['GET','POST','PUT','DELETE'],
+    credentials: true,
+    }
+));
 app.use(express.json());
 
 
