@@ -2,20 +2,34 @@ let express  = require('express');
 let mongoose = require('mongoose');
 const enquiryRoute = require('./App/routes/web/enquiryRoute');
 require('dotenv').config();
-let cors = require('cors');
 let app = express();
-app.use(cors(
-    {
-    origin: ['https://user-enquiry-app.vercel.app'],// your frontend URL
-    methods: ['GET','POST','PUT','DELETE'],
+
+// CORS setup
+const corsOptions = {
+    origin: [
+        'https://user-enquiry-app.vercel.app', // production frontend
+        'http://localhost:5173',               // local dev
+        /\.vercel\.app$/                       // any vercel preview
+    ],
+    methods: ['GET','POST','PUT','DELETE','OPTIONS'],
     credentials: true,
-    }
-));
+};
+app.use(cors(corsOptions));
+
+// parse JSON bodies
 app.use(express.json());
 
+app.use((req,res,next)=>{
+    res.setHeader('Content-Type','application/json');
+    next();
+});
 
-//Routes
 app.use('/api/website/enquiry' , enquiryRoute);
+
+app.get('/', (req,res)=>{
+    res.status(200).json({ ok:true, message:"Backend is running"});
+});
+
 
 //connect to db
 mongoose.connect(process.env.DBURL).then(()=>{
